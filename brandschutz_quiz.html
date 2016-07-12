@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+
+  <title>Brandschutz Teil 2 - MulQuiz</title>
+  <meta name="description" content="Brandschutz Quiz">
+  <meta name="author" content="Christian Aluani - 2016">
+
+  <link rel="stylesheet" href="data/styles.css">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="data/jquery-2.2.0.min/index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script type="text/javascript" src="data/data.js"></script>
+  <script type="text/javascript" src="data/scripts.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <img src="data/logo.jpg" />
+        <h2>Ist der Brandschutz ein Stiefkind (Teil 2) ? - Multiple Choice Test</h2>
+    </div>
+    <div id="content">
+        <div id="home">
+            <h1>Herzlich Willkommen beim Quiz!</h1>
+            <div class="button-bar">
+                <button onclick="startQuiz()">Quiz starten</button>
+                <button onclick="showQuestions()">Fragenkatalog anzeigen</button>
+            </div>
+        </div>
+        <div id="question-template">
+            <p class="counter"></p>
+            <p id="question-title">Frage</p>        
+            <ul id="answers">            
+                <input type="radio" name="question" value="a" id="qa"><label class="answer-a">Antwort 1</label><br/>          
+                <input type="radio" name="question" value="b" id="qb"><label class="answer-b">Antwort 2</label><br/>            
+                <input type="radio" name="question" value="c" id="qc"><label class="answer-c">Antwort 3</label><br/>            
+                <input type="radio" name="question" value="d" id="qd"><label class="answer-d">Antwort 4</label><br/>       
+            </ul>
+            <button id="next">Weiter</button>
+        </div>
+        <div id="result">
+            <div id="score-block">
+                <h3>Dein Ergebnis: <span id="score"></span> von 65 Fragen richtig</h3>
+                <button id="restart" onclick="location.reload()">Neustart</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <h4>Copyright 2016 - Christian Aluani</h4>
+    </div>      
+</body>
+</html>
