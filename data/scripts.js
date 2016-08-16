@@ -1,7 +1,6 @@
 var counter = 0;
 var curr_id = 0;
 var arr = Array.apply(null, { length: 65 }).map(Number.call, Number);
-console.log(arr);
 var selections = [];
 var new_data = {};
 var new_arr = [];
@@ -10,20 +9,31 @@ $(document).ready(function () {
     $("#question-template").hide();
     $("#result").hide();
     $("#home").show();
+	$("#backBtn").hide();
 });
 
 function startQuiz() {
-    $("#question-template").show();
+    window.localStorage.setItem("test", "started");
+	$("#question-template").show();
     $("#result").hide();
     $("#home").hide();
+	$("#save").show();
     new_arr = shuffleArray(arr);
     curr_id = new_arr[counter];
     new_data = data[curr_id];
     changeQuestion(new_data);
+}
 
-    $("#next").click(function () {
-        if (!$("input[name=question]:checked").val()) {
+function next(skip) {
+    if(!skip)
+	{
+		var result = { "id": curr_id, "chosen": null, "correct": false, "correct_answ": new_data.correct };
+		selections.push(result);
+	}
+	else {
+		if (!$("input[name=question]:checked").val()) {
             alert("Keine Antwort ausgewählt!");
+			return;
         }
         else {
             var chosen = $("input[name=question]:checked").val();
@@ -34,50 +44,54 @@ function startQuiz() {
                 var result = { "id": curr_id, "chosen": chosen, "correct": false, "correct_answ": new_data.correct };
             }
             selections.push(result);
-            if (counter < 65) {
-                counter = counter + 1;
-                curr_id = counter;
+		}
+	}
+	if (counter < 64) {
+		counter = counter + 1;
 
-                curr_id = new_arr[counter];
-                new_data = data[curr_id];
+		curr_id = new_arr[counter];
+		new_data = data[curr_id];
 
-                changeQuestion(new_data);
-            }
-            else {
-                var score = 0;
-                var text = "";
-                var str = "";
-                for (var i = 0; i < selections.length; i++) {
-                    str_1 = "<div class='res_question'><h3>" + (i + 1) + ". " + data[selections[i].id].question + "</h3></div>";
-                    answer = data[selections[i].id].answers[selections[i].chosen];
-                    str_2 = "<div class='res_answer'><span>Deine Antwort: " + answer + "</span></div>";
-                    $("#result").append("<div class='res' id='res_" + i + "'></div>");
-                    if (selections[i].correct === true) {
-                        score++;
-                        text = "<div class='res_answer_correct'> Richtig </div>";
-                        str_3 = "<div></div>";
-                    }
-                    else {
-                        text = "<div class='res_answer_wrong'> Falsch </div>";
-                        answer = data[selections[i].id].answers[selections[i].correct_answ];
-                        str_3 = "<div class='res_answer'><span>Richtige Antwort: " + answer + "</span></div>";
-                    }
+		changeQuestion(new_data);
+	}
+	else {
+		var score = 0;
+		var text = "";
+		var str = "";
+		for (var i = 0; i < selections.length; i++) {
+			str_1 = "<div class='res_question'><h3>" + (i + 1) + ". " + data[selections[i].id].question + "</h3></div>";
+			if(selections[i].chosen !== null)
+			{
+				answer = data[selections[i].id].answers[selections[i].chosen];
+			}
+			else {
+				answer = '';
+			}
+			str_2 = "<div class='res_answer'><span>Deine Antwort: " + answer + "</span></div>";
+			$("#result").append("<div class='res' id='res_" + i + "'></div>");
+			if (selections[i].correct === true) {
+				score++;
+				text = "<div class='res_answer_correct'> Richtig </div>";
+				str_3 = "<div></div>";
+			}
+			else {
+				text = "<div class='res_answer_wrong'> Falsch </div>";
+				answer = data[selections[i].id].answers[selections[i].correct_answ];
+				str_3 = "<div class='res_answer'><span>Richtige Antwort: " + answer + "</span></div>";
+			}
 
-                    $("#res_" + i).append(str_1);
-                    $("#res_" + i).append(text);
-                    $("#res_" + i).append(str_2);
-                    $("#res_" + i).append(str_3)
+			$("#res_" + i).append(str_1);
+			$("#res_" + i).append(text);
+			$("#res_" + i).append(str_2);
+			$("#res_" + i).append(str_3)
 
-                    $("#result #score")[0].innerHTML = score;
+			$("#result #score")[0].innerHTML = score;
 
-                    $("#result").show();
-                    $("#question-template").hide();
-                }
-            }
-        }
-    });
-}
-
+			$("#result").show();
+			$("#question-template").hide();
+		}
+	}
+ }
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -125,6 +139,7 @@ function showQuestions() {
         }
 
         $("#result").show();
+		$('#backBtn').show();
         $("#score-block").hide();
         $("#question-template").hide();
         $("#home").hide();

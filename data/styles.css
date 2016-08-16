@@ -19,7 +19,7 @@ button {
     margin-right: 25px;
 }
 
-#next, #restart {
+#next, #restart, #skip {
     width: 150px;
     height: 40px;
     padding: 5px;
@@ -57,11 +57,16 @@ button {
     letter-spacing: 1px;
 }
 
+.header #backBtn {
+	cursor: pointer;
+	display: none;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 80px;
+    height: 40px;
     width: 100%;
     background-color: #607D8B;
     display: flex;

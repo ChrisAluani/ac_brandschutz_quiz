@@ -21,6 +21,7 @@
 
 <body>
     <div class="header">
+		<button onclick="location.reload()" id="backBtn">Zur&uuml;ck zum Men&uuml;</button>
         <img src="data/logo.jpg" />
         <h2>Ist der Brandschutz ein Stiefkind (Teil 2) ? - Multiple Choice Test</h2>
     </div>
@@ -28,7 +29,7 @@
         <div id="home">
             <h1>Herzlich Willkommen beim Quiz!</h1>
             <div class="button-bar">
-                <button onclick="startQuiz()">Quiz starten</button>
+				<button onclick="startQuiz()">Quiz starten</button>
                 <button onclick="showQuestions()">Fragenkatalog anzeigen</button>
             </div>
         </div>
@@ -41,7 +42,8 @@
                 <input type="radio" name="question" value="c" id="qc"><label class="answer-c">Antwort 3</label><br/>            
                 <input type="radio" name="question" value="d" id="qd"><label class="answer-d">Antwort 4</label><br/>       
             </ul>
-            <button id="next">Weiter</button>
+            <button id="next" onclick="next(true)">Weiter</button>
+			<button id="skip" onclick="next(false)">&Uuml;berspringen</button>
         </div>
         <div id="result">
             <div id="score-block">
