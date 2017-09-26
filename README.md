@@ -11,6 +11,9 @@ und 3 neuen Fragen aus der Prüfung vom 07.07.2016
 zur Lehrveranstaltung ist der Brandschutz ein Stiefkind (Teil 2) an der KF Uni Graz.
 Die Fragen kommen immer in zufälliger Reihenfolge und am Ende gibt es eine Auswertung.
 
+##Browser
+**ACHTUNG! Die Funktionalität kann momentan nur mit GOOGLE CHROME und FIREFOX garantiert werden. Ein Update ist geplant.**
+
 ##Ausführung
 Einfach auf dieser Seite das .zip mit den Dateien herunterladen, extrahieren und
 die Datei **brandschutz_quiz.html** ausführen.
